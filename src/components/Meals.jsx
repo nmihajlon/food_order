@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { getAllMeals } from '../http.js'
+import MealCard from './MealCard.jsx';
  
 const Meals = ({  }) => {
     const [meals, setMeals] = useState([]);
@@ -12,14 +13,14 @@ const Meals = ({  }) => {
         }
 
         fetch();
-    }, [])
+    }, [getAllMeals])
 
     return (
         <ul id='meals'>
             {meals.map(meal => {
 
                 return (
-                    <li key={meal.id}>{meal.name}</li>
+                    <MealCard key={meal.id} item={meal}/>
                 );
             })}
         </ul>
