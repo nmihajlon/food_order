@@ -9,6 +9,7 @@ import CartItem from "./CartItem.jsx";
 const Cart = () => {
   const cartContext = useContext(CartContext);
   const userProgressCtx = useContext(UserProgressContext);
+  console.log(userProgressCtx.progress);
 
   const cartTotal = cartContext.items.reduce(
     (akumulator, item) => akumulator + item.quantity * item.price,
@@ -19,9 +20,13 @@ const Cart = () => {
     userProgressCtx.hideCart();
   }
 
+  function handleShowCheckout(){
+    userProgressCtx.showCheckout();
+  }
+
   return (
     //open ce da bude true
-    <Modal className="cart" open={userProgressCtx.progress === "cart"}>
+    <Modal className="cart" open={userProgressCtx.progress === "cart"} onClose={userProgressCtx.progress === "cart" ? handleCloseCart : null}>
       <h2>Your Cart</h2>
       <ul>
         {cartContext.items.map((item) => (
@@ -40,7 +45,7 @@ const Cart = () => {
         <Button textOnly onClick={handleCloseCart}>
           Close
         </Button>
-        {cartContext.items.length > 0 && <Button onClick={handleCloseCart}>Go to Checkout</Button>}
+        {cartContext.items.length > 0 && <Button onClick={handleShowCheckout}>Go to Checkout</Button>}
       </p>
     </Modal>
   );

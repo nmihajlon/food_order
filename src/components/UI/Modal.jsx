@@ -1,7 +1,8 @@
-import React, { useEffect, useRef } from "react";
+import React, { useContext, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
+import UserProgressContext from "../../store/UserProgressContext";
 
-const Modal = ({ children, open, className = '' }) => {
+const Modal = ({ children, open, onClose, className = '' }) => {
   const modal = useRef();
 
   useEffect(() => {
@@ -13,9 +14,8 @@ const Modal = ({ children, open, className = '' }) => {
     }
   }, [open]);
 
-
   return createPortal(
-    <dialog ref={modal} className={`modal ${className}`}>
+    <dialog ref={modal} className={`modal ${className}`} onClose={onClose}>
       {children}
     </dialog>
     , document.getElementById("modal"));
