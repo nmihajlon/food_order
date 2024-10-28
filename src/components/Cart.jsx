@@ -40,7 +40,7 @@ const Cart = () => {
         <Button textOnly onClick={handleCloseCart}>
           Close
         </Button>
-        <Button onClick={handleCloseCart}>Go to Checkout</Button>
+        {cartContext.items.length > 0 && <Button onClick={handleCloseCart}>Go to Checkout</Button>}
       </p>
     </Modal>
   );
